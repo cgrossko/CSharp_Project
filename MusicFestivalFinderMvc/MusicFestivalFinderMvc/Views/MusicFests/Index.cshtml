@@ -1,0 +1,69 @@
+﻿@model IEnumerable<MusicFestivalFinderMvc.Models.MusicFest>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 id="header">Search for your favorite bands!</h2>
+
+<div class="container-fluid">
+	<div class="row">
+		<form id="searchbox" action="">
+			<p>
+				@Html.TextBox("SearchString", null, "", new
+ {
+	 id = "search",
+	 type = "text",
+	 placeholder = "Search for bands here"
+ })
+				<input id="submit" type="submit" value="Search" />
+			</p>
+		</form>
+	</div>
+</div>
+
+
+<div class="table-responsive">
+	<table class="table">
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Band)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Festival)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Location)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.DateStart)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.DateEnd)
+			</th>
+			<th></th>
+		</tr>
+
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Band)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Festival)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Location)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.DateStart)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.DateEnd)
+				</td>
+
+			</tr>
+		}
+	</table>
+</div>

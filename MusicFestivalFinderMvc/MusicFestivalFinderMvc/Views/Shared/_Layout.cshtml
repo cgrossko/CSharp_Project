@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title Music Festival Finder</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+	<link href="~/Content/fontawesome.css" rel="stylesheet" />
+	<link href='https://fonts.googleapis.com/css?family=Rock+Salt|Permanent+Marker|Covered+By+Your+Grace' rel='stylesheet' type='text/css'>
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+										<li>@Html.ActionLink("Music Festival Finder", "Index", "Home", new
+									 {
+										 area = ""
+									 }, new
+									 {
+										 @class = "navbar-brand"})
+										</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+										<li>@Html.ActionLink("Search", "Index", "MusicFests")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+			<footer>
+				<p>&copy; @DateTime.Now.Year Music Festival Finder</p>
+				<ul class="fa-stack fa-lg">
+					<li>
+						<a href="http://twitter.com/ChristianGKopf" class="fa fa-square-o fa-stack-2x fa fa-twitter fa-stack-1x"></a>
+					</li>
+					<li>
+						<a href="http://instagram.com/christiangrosskopf" class="fa fa-square-o fa-stack-2x fa fa-instagram fa-stack-1x"></a>
+					</li>
+					<li>
+						<a href="mailto:christiangrosskopf@yahoo.com" class="fa fa-square-o fa-stack-2x fa fa-envelope fa-stack-1x"></a>
+					</li>
+					<li>
+						<a href="http://linkedin.com/christiangrosskopf" class="fa fa-square-o fa-stack-2x fa fa-linkedin fa-stack-1x"></a>
+					</li>
+				</ul>
+			</footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

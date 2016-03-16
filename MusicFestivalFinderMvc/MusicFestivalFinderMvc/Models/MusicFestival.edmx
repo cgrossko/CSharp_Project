@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MusicFestivalDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BandFestival">
+          <Key>
+            <PropertyRef Name="FestivalID" />
+          </Key>
+          <Property Name="BandID" Type="int" Nullable="false" />
+          <Property Name="FestivalID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BandTable">
+          <Key>
+            <PropertyRef Name="BandID" />
+          </Key>
+          <Property Name="BandID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Band" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="FestivalTable">
+          <Key>
+            <PropertyRef Name="FestivalID" />
+          </Key>
+          <Property Name="FestivalID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Festival" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Location" Type="varchar" MaxLength="50" />
+          <Property Name="DateStart" Type="date" />
+          <Property Name="DateEnd" Type="date" />
+        </EntityType>
+        <Association Name="FK_BandFestival_BandTable">
+          <End Role="BandTable" Type="Self.BandTable" Multiplicity="1" />
+          <End Role="BandFestival" Type="Self.BandFestival" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BandTable">
+              <PropertyRef Name="BandID" />
+            </Principal>
+            <Dependent Role="BandFestival">
+              <PropertyRef Name="BandID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BandFestival_FestivalTable">
+          <End Role="FestivalTable" Type="Self.FestivalTable" Multiplicity="1" />
+          <End Role="BandFestival" Type="Self.BandFestival" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="FestivalTable">
+              <PropertyRef Name="FestivalID" />
+            </Principal>
+            <Dependent Role="BandFestival">
+              <PropertyRef Name="FestivalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MusicFestivalDbModelStoreContainer">
+          <EntitySet Name="BandFestival" EntityType="Self.BandFestival" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BandTable" EntityType="Self.BandTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FestivalTable" EntityType="Self.FestivalTable" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BandFestival_BandTable" Association="Self.FK_BandFestival_BandTable">
+            <End Role="BandTable" EntitySet="BandTable" />
+            <End Role="BandFestival" EntitySet="BandFestival" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BandFestival_FestivalTable" Association="Self.FK_BandFestival_FestivalTable">
+            <End Role="FestivalTable" EntitySet="FestivalTable" />
+            <End Role="BandFestival" EntitySet="BandFestival" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MusicFestivalDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BandTable">
+          <Key>
+            <PropertyRef Name="BandID" />
+          </Key>
+          <Property Name="BandID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Band" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="FestivalTables" Relationship="Self.BandFestival" FromRole="BandTable" ToRole="FestivalTable" />
+        </EntityType>
+        <EntityType Name="FestivalTable">
+          <Key>
+            <PropertyRef Name="FestivalID" />
+          </Key>
+          <Property Name="FestivalID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Festival" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DateStart" Type="DateTime" Precision="0" />
+          <Property Name="DateEnd" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="BandTable" Relationship="Self.BandFestival" FromRole="FestivalTable" ToRole="BandTable" />
+        </EntityType>
+        <Association Name="BandFestival">
+          <End Role="BandTable" Type="Self.BandTable" Multiplicity="0..1" />
+          <End Role="FestivalTable" Type="Self.FestivalTable" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="MusicFestivalDbEntities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BandTables" EntityType="Self.BandTable" />
+          <EntitySet Name="FestivalTables" EntityType="Self.FestivalTable" />
+          <AssociationSet Name="BandFestival" Association="Self.BandFestival">
+            <End Role="BandTable" EntitySet="BandTables" />
+            <End Role="FestivalTable" EntitySet="FestivalTables" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MusicFestivalDbModelStoreContainer" CdmEntityContainer="MusicFestivalDbEntities3">
+          <EntitySetMapping Name="BandTables">
+            <EntityTypeMapping TypeName="MusicFestivalDbModel.BandTable">
+              <MappingFragment StoreEntitySet="BandTable">
+                <ScalarProperty Name="BandID" ColumnName="BandID" />
+                <ScalarProperty Name="Band" ColumnName="Band" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FestivalTables">
+            <EntityTypeMapping TypeName="MusicFestivalDbModel.FestivalTable">
+              <MappingFragment StoreEntitySet="FestivalTable">
+                <ScalarProperty Name="FestivalID" ColumnName="FestivalID" />
+                <ScalarProperty Name="Festival" ColumnName="Festival" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+                <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="BandFestival" TypeName="MusicFestivalDbModel.BandFestival" StoreEntitySet="BandFestival">
+            <EndProperty Name="BandTable">
+              <ScalarProperty Name="BandID" ColumnName="BandID" />
+            </EndProperty>
+            <EndProperty Name="FestivalTable">
+              <ScalarProperty Name="FestivalID" ColumnName="FestivalID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
