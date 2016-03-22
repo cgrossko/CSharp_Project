@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using MusicFestivalFinderMvc.Models;
 
+
 namespace MusicFestivalFinderMvc.Controllers
 {
     public class MusicFestsController : Controller
@@ -15,6 +16,7 @@ namespace MusicFestivalFinderMvc.Controllers
         private MusicFestivalDbEntities2 db = new MusicFestivalDbEntities2();
 
         // GET: MusicFests
+				[HandleError]
         public ActionResult Index(string searchString)
         {
 			var bands = from b in db.MusicFests
@@ -29,8 +31,8 @@ namespace MusicFestivalFinderMvc.Controllers
 		}
 
 
-        // GET: MusicFests/Details/5
-        public ActionResult Details(int? id)
+		// GET: MusicFests/Details/5
+		public ActionResult Details(int? id)
         {
             if (id == null)
             {

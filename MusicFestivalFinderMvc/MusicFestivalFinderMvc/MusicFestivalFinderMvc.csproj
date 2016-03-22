@@ -249,9 +249,11 @@
     <Content Include="Views\MusicFests\Details.cshtml" />
     <Content Include="Views\MusicFests\Edit.cshtml" />
     <Content Include="Views\MusicFests\Index.cshtml" />
+    <Content Include="Views\Shared\NotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Error\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
