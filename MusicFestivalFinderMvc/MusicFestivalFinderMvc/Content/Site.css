@@ -157,6 +157,10 @@ th {
 	transition: all .5s ease-in-out;
 }
 
+.fa-stack.fa-lg li {
+	display: inline-block;
+}
+
 .jumbotron h1 {
 	font-family: 'Rock Salt', cursive;
 }
@@ -180,6 +184,10 @@ th {
 	#searchbox {height:100px}
 	#search {border-radius:25px}
 	#search{margin:0 0 0 30px}
+	footer {
+	list-style: none;
+	text-align: center;
+}
 }
 
 @media (max-width: 380px) {
@@ -189,5 +197,9 @@ th {
 	#searchbox {height:100px}
 	#search {border-radius:25px}
 	#search{margin:0 0 0 17px}
+	footer {
+	list-style: none;
+	text-align: center;
+}
 }
 
