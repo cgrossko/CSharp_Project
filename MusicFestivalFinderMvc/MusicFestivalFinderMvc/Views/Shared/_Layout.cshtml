@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using MusicFestivalFinderMvc.utilities
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -29,9 +30,9 @@
 									 {
 										 @class = "navbar-brand"})
 										</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-										<li>@Html.ActionLink("Search", "Index", "MusicFests")</li>
+                    <li class='@Html.IsActive("Home", "About")'>@Html.ActionLink("About", "About", "Home")</li>
+                    <li class='@Html.IsActive("Home", "Contact")'>@Html.ActionLink("Contact", "Contact", "Home")</li>
+										<li class='@Html.IsActive("MusicFests", "Index")'>@Html.ActionLink("Search", "Index", "MusicFests")</li>
                 </ul>
             </div>
         </div>
